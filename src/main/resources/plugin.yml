@@ -1,0 +1,19 @@
+name: ${pluginName}
+version: ${version}
+main: com.libelulamapinspector.LibelulaMapInspectorPlugin
+api-version: '26.1'
+authors:
+  - Diego D'Onofrio
+description: Lets admins see who placed or removed each block to investigate and repair grief.
+commands:
+  lmi:
+    description: Administrative command for LibelulaMapInspector.
+    usage: /lmi [wand|discover|undo|clear-db|confirm]
+    aliases:
+      - libelulamapinspector
+    permission: libelulamapinspector.admin
+    permission-message: You do not have permission to use this administrative command.
+permissions:
+  libelulamapinspector.admin:
+    description: Allows using all LibelulaMapInspector administrative commands.
+    default: op

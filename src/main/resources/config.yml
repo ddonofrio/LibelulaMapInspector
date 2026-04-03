@@ -1,0 +1,78 @@
+# LibelulaMapInspector configuration
+#
+# The "commands" section controls shared admin command defaults.
+commands:
+  # Default cube radius used by radius-based admin commands when no value is provided.
+  default-radius: 10
+
+  # Maximum amount of world block edits applied per tick during undo.
+  undo-blocks-per-tick: 10
+
+# The "capture" section controls which player actions LibelulaMapInspector listens to.
+capture:
+  # Worlds listed here are ignored by all capture listeners.
+  excluded-worlds:
+    - world_creative
+
+  blocks:
+    # Enables block break tracking.
+    # Disable this only if you intentionally want to stop recording player block removals.
+    block-break: true
+
+    # Enables normal single-block placement tracking.
+    block-place: true
+
+    # Enables multi-block placement tracking such as doors, beds, and similar structures.
+    block-multi-place: true
+
+    # Enables sign text tracking after placement or editing.
+    sign-change: true
+
+  fluids:
+    # Enables player bucket empty tracking for water and lava placement.
+    bucket-empty: true
+
+    # Enables player bucket fill tracking for water and lava removal.
+    bucket-fill: true
+
+    # Tracks water and lava chain reactions so generated cobblestone, stone, or obsidian
+    # can be attributed to the player who started the fluid grief.
+    # This adds extra runtime work and should only be enabled if you really need it.
+    fluid-grief-tracking: false
+
+  explosions:
+    # Enables TNT grief attribution.
+    # When enabled, blocks destroyed by TNT are attributed to the player who ignited it.
+    tnt-explosions: true
+
+# The "chunks" section controls how much on-disk history LibelulaMapInspector keeps.
+chunks:
+  limits:
+    # Total chunk history disk budget in mebibytes.
+    # LibelulaMapInspector always calculates megabytes as value * 1024 * 1024.
+    max-total-size-megabytes: 1024
+
+    # Delete records older than this amount of days.
+    max-record-age-days: 365
+
+# The "index" section controls the in-memory index and write buffers used to
+# keep history lookups fast and recent changes ready to persist.
+#
+# If you do not know what these values do, do not change them.
+# Setting them incorrectly can harm the plugin's performance.
+#
+index:
+  # Total memory budget in mebibytes.
+  # LibelulaMapInspector always calculates megabytes as value * 1024 * 1024.
+  megabytes: 100
+
+  # False positive disk access rate.
+  # 0.01 = 1% false positives.
+  false-positive-rate: 0.01
+
+  # Additional write buffer memory budget in mebibytes.
+  # This buffer keeps recent block history in memory before it is persisted.
+  buffer-megabytes: 50
+
+  # How often the plugin persists the in-memory changes to disk.
+  persist-interval-minutes: 60
